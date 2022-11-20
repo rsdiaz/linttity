@@ -1,6 +1,6 @@
 {
   "name": "linttity",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automate eslint configuration and install the necessary packages for Nodejs projects",
   "main": "src/index.js",
   "bin": {
