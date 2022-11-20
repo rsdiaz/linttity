@@ -1,5 +1,5 @@
 # What this linttity? 🤔
-Automate eslint configuration and install the necessary packages for Nodejs projects.
+Automate ESlint & Prettier configuration and install the necessary packages for Nodejs projects.
 
 ## Install
 ```
@@ -10,5 +10,5 @@ npm install -g linttity
 linttity [option]
 ```
 ### Options
- - -nodejs or --njs
- - -nodets or --nts
+ - -nodejs or --njs  ESLint and Prettier config for Nodejs & Javascript
+ - -nodets or --nts  ESLint and Prettier config for Nodejs & Typescript
