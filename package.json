@@ -4,7 +4,7 @@
   "description": "Automate eslint configuration and install the necessary packages for Nodejs projects",
   "main": "src/index.js",
   "bin": {
-    "linttity": "./src/index.js"
+    "linttity": "./src/index.cjs"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
