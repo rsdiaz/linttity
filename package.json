@@ -1,7 +1,7 @@
 {
   "name": "linttity",
   "version": "1.0.1",
-  "description": "Automate eslint configuration and install the necessary packages for Nodejs projects",
+  "description": "Automate ESlint and Prettier configuration and install the necessary packages for Nodejs projects",
   "main": "src/index.js",
   "bin": {
     "linttity": "./src/index.cjs"
