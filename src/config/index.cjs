@@ -15,6 +15,10 @@ const INTRO = `
 --------------------
 Linttity ${VERSION} 🔥
 --------------------
+  usage: 
+        linttity 
+              -nodejs     ESLint and Prettier config for Nodejs & Javascript
+              -nodets     ESLint and Prettier config for Nodejs & Typescript
 `
 
 module.exports = {
