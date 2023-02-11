@@ -1,4 +1,4 @@
-const VERSION = 'v1.0.0'
+const VERSION = 'v1.0.5'
 const ESLINT_FILE_NAME = '.eslintrc.cjs'
 const END_MESSAGE =
   '🔥🔥🔥 Linter configuration completed! Happy codding! 🔥🔥🔥\n'

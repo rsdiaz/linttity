@@ -5,7 +5,7 @@ const {
 } = require('../../config/index.cjs')
 const eslintrc = require('./eslint/index.cjs')
 const execCommand = require('../../utils/exec-command.cjs')
-const { default: editTSConfig } = require('../../utils/edit-ts-config.cjs')
+const editTSConfig = require('../../utils/edit-ts-config.cjs')
 
 const install = async () => {
   console.log('Nodejs whit TypeScript\n')
