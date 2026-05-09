@@ -29,14 +29,29 @@ const checkPackageJsonScripts = async (): Promise<string[]> => {
 export const runDoctor = async (): Promise<void> => {
   const packageManager = await detectPackageManager()
   const missingScripts = await checkPackageJsonScripts()
+  const eslintConfigFiles = [
+    'eslint.config.cjs',
+    'eslint.config.js',
+    '.eslintrc.json',
+    '.eslintrc.cjs',
+    '.eslintrc.js'
+  ]
+  const existingEslintConfigs = await Promise.all(
+    eslintConfigFiles.map((filePath) => exists(filePath))
+  )
+  const hasEslintConfig = existingEslintConfigs.some(Boolean)
+  const foundEslintConfigs = eslintConfigFiles.filter(
+    (_, index) => existingEslintConfigs[index]
+  )
 
   console.log(`\n${ui.title('linttity doctor')}`)
   console.log(ui.divider())
   console.log(ui.keyValue('Detected package manager', packageManager))
+  console.log(ui.keyValue('Has ESLint config', String(hasEslintConfig)))
   console.log(
     ui.keyValue(
-      'Has eslint.config.cjs',
-      String(await exists('eslint.config.cjs'))
+      'ESLint config file',
+      foundEslintConfigs.length > 0 ? foundEslintConfigs.join(', ') : 'none'
     )
   )
   console.log(
