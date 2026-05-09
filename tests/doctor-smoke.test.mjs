@@ -47,7 +47,10 @@ test('doctor reports multiple detected ESLint config files', async () => {
 
     assert.equal(result.status, 0, result.stderr)
     assert.match(output, /Has ESLint config: true/)
-    assert.match(output, /ESLint config file: eslint\.config\.cjs, \.eslintrc\.cjs/)
+    assert.match(
+      output,
+      /ESLint config file: eslint\.config\.cjs, \.eslintrc\.cjs/
+    )
     assert.match(output, /Package scripts: OK/)
   } finally {
     await rm(projectDir, { recursive: true, force: true })

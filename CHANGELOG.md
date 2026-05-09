@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [1.1.2] - 2026-05-09
+
+### Added
+
+- New smoke test for `--doctor` output coverage:
+  - verifies detection of multiple ESLint config files
+  - normalizes ANSI terminal output for stable assertions
+
+### Fixed
+
+- Corrected ESLint config detection in doctor diagnostics:
+  - now checks if any valid ESLint config exists (instead of requiring all)
+  - now reports the exact ESLint config file(s) found
+
 ## [1.1.1] - 2026-05-09
 
 ### Added
