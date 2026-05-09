@@ -1,8 +1,26 @@
 # Linttity
 
+[![npm version](https://img.shields.io/npm/v/linttity.svg)](https://www.npmjs.com/package/linttity)
+[![npm downloads](https://img.shields.io/npm/dm/linttity.svg)](https://www.npmjs.com/package/linttity)
+[![CI](https://github.com/rsdiaz/linttity/actions/workflows/quality.yml/badge.svg)](https://github.com/rsdiaz/linttity/actions/workflows/quality.yml)
+[![license](https://img.shields.io/npm/l/linttity.svg)](https://www.npmjs.com/package/linttity)
+[![node](https://img.shields.io/badge/node-%3E%3D18-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+
+Node.js 18+, ESLint 9, Prettier 3.
+
 Linttity is a CLI utility that bootstraps lint and format tooling for Node.js projects.
 
-It installs the required development dependencies and generates a ready-to-use `eslint.config.cjs` preset.
+It installs required dependencies and generates a production-ready quality baseline for JavaScript and TypeScript projects.
+
+Repository: https://github.com/rsdiaz/linttity
+Issues: https://github.com/rsdiaz/linttity/issues
+
+## Why Linttity
+
+- Fast setup for ESLint + Prettier with one command
+- Consistent project quality defaults for JavaScript and TypeScript
+- Safe file handling with merge and overwrite strategies
+- Release-ready workflow support for maintainers
 
 ## Features
 
@@ -15,9 +33,14 @@ It installs the required development dependencies and generates a ready-to-use `
 - Rule levels: `strict`, `balanced`, `relaxed`
 - Import ordering rules included in generated ESLint configs
 - Package script bootstrap (`lint`, `lint:fix`, `format`, `format:check`)
+- `.editorconfig` generation for editor consistency
 - Optional GitHub Actions workflow generation
 - `doctor` command for setup diagnostics
 - Automated smoke tests for CLI behavior
+
+## Requirements
+
+- Node.js 18+
 
 ## Installation
 
@@ -52,6 +75,18 @@ Options:
 - `--doctor`: inspect the current project lint/format setup
 
 Use only one option at a time.
+
+## Generated files
+
+Depending on project type and strategy, Linttity can create/update:
+
+- `eslint.config.cjs` (default) or `eslint.config.js` for ESM projects
+- `.prettierrc.json`
+- `.prettierignore`
+- `.editorconfig`
+- `tsconfig.json` (TypeScript preset)
+- `.github/workflows/quality.yml` (unless `--no-ci`)
+- `package.json` scripts (if missing)
 
 ## Examples
 
@@ -90,20 +125,22 @@ linttity
 ### Node.js + JavaScript (`--nodejs`)
 
 1. Installs lint/format dependencies for JavaScript projects.
-2. Creates or overwrites `eslint.config.cjs` with a Node.js JavaScript preset.
+2. Creates or overwrites ESLint flat config (`eslint.config.cjs` by default, `eslint.config.js` for ESM projects).
 3. Creates or overwrites `.prettierrc.json` and `.prettierignore`.
-4. Adds scripts to `package.json` when missing.
-5. Optionally generates `.github/workflows/quality.yml`.
+4. Creates or overwrites `.editorconfig`.
+5. Adds scripts to `package.json` when missing.
+6. Optionally generates `.github/workflows/quality.yml`.
 
 ### Node.js + TypeScript (`--nodets`)
 
 1. Installs lint/format dependencies for TypeScript projects.
-2. Creates or overwrites `eslint.config.cjs` with a Node.js TypeScript preset.
+2. Creates or overwrites ESLint flat config (`eslint.config.cjs` by default, `eslint.config.js` for ESM projects).
 3. Creates or overwrites `.prettierrc.json` and `.prettierignore`.
-4. Ensures `tsconfig.json` exists for TypeScript projects.
-5. Can normalize `tsconfig.json` when using `--overwrite`.
-6. Adds scripts to `package.json` when missing.
-7. Optionally generates `.github/workflows/quality.yml`.
+4. Creates or overwrites `.editorconfig`.
+5. Ensures `tsconfig.json` exists for TypeScript projects.
+6. Can normalize `tsconfig.json` when using `--overwrite`.
+7. Adds scripts to `package.json` when missing.
+8. Optionally generates `.github/workflows/quality.yml`.
 
 ## Notes
 
@@ -111,6 +148,16 @@ linttity
 - If you omit preset flags, Linttity prompts you interactively.
 - `--merge` keeps existing files for non-safe merges (for example `.eslintrc.cjs`).
 - `--overwrite` replaces generated config files.
+
+## Contributing
+
+1. Create a feature branch.
+2. Keep quality checks green before opening a pull request.
+3. Run this local validation set:
+   - `npm run format:check`
+   - `npm run build`
+   - `npm run lint`
+   - `npm test`
 
 ## Local development
 
