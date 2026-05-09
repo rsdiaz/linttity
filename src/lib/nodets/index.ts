@@ -1,5 +1,4 @@
 import {
-  ESLINT_FILE_NAME,
   NODEJS_TYPESCRIPT_DEV_DEPENDENCIES,
   PRETTIER_CONFIG,
   PRETTIER_FILE_NAME,
@@ -9,6 +8,7 @@ import {
 import execCommand from '../../utils/exec-command.js'
 import editTSConfig from '../../utils/edit-ts-config.js'
 import { ensureCiWorkflow } from '../../utils/ci.js'
+import { resolveEslintConfigFileName } from '../../utils/eslint-config-file.js'
 import { getInstallCommand } from '../../utils/package-manager.js'
 import { ensurePackageScripts } from '../../utils/package-scripts.js'
 import { writeGeneratedFile } from '../../utils/write-generated-file.js'
@@ -36,12 +36,14 @@ const install = async (options: InstallOptions): Promise<InstallSummary> => {
   console.log(ui.success('Dev dependencies ready.'))
 
   const touchedFiles: TouchedFile[] = []
+  const eslintFileName = await resolveEslintConfigFileName()
+  const eslintModuleKind = eslintFileName.endsWith('.js') ? 'esm' : 'cjs'
 
   console.log(ui.info('Generating eslint config...'))
   touchedFiles.push(
     await writeGeneratedFile(
-      ESLINT_FILE_NAME,
-      buildEslintConfig('nodets', options.ruleLevel),
+      eslintFileName,
+      buildEslintConfig('nodets', options.ruleLevel, eslintModuleKind),
       options.strategy
     )
   )
