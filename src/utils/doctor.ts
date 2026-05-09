@@ -29,6 +29,7 @@ const checkPackageJsonScripts = async (): Promise<string[]> => {
 export const runDoctor = async (): Promise<void> => {
   const packageManager = await detectPackageManager()
   const missingScripts = await checkPackageJsonScripts()
+
   const eslintConfigFiles = [
     'eslint.config.cjs',
     'eslint.config.js',
@@ -60,9 +61,15 @@ export const runDoctor = async (): Promise<void> => {
       String(await exists('.prettierrc.json'))
     )
   )
+
+  console.log(
+    ui.keyValue('Has .editorconfig', String(await exists('.editorconfig')))
+  )
+
   console.log(
     ui.keyValue('Has .prettierignore', String(await exists('.prettierignore')))
   )
+
   console.log(
     ui.keyValue('Has tsconfig.json', String(await exists('tsconfig.json')))
   )

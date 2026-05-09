@@ -1,4 +1,6 @@
 import {
+  EDITORCONFIG_CONTENT,
+  EDITORCONFIG_FILE_NAME,
   NODEJS_TYPESCRIPT_DEV_DEPENDENCIES,
   PRETTIER_CONFIG,
   PRETTIER_FILE_NAME,
@@ -56,6 +58,11 @@ const install = async (options: InstallOptions): Promise<InstallSummary> => {
       writeGeneratedFile(
         PRETTIER_IGNORE_FILE_NAME,
         PRETTIER_IGNORE,
+        options.strategy
+      ),
+      writeGeneratedFile(
+        EDITORCONFIG_FILE_NAME,
+        EDITORCONFIG_CONTENT,
         options.strategy
       )
     ]))

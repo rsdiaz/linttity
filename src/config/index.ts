@@ -1,5 +1,6 @@
-export const VERSION = 'v1.1.0'
+export const VERSION = 'v1.1.3'
 export const ESLINT_FILE_NAME = 'eslint.config.cjs'
+export const EDITORCONFIG_FILE_NAME = '.editorconfig'
 export const PRETTIER_FILE_NAME = '.prettierrc.json'
 export const PRETTIER_IGNORE_FILE_NAME = '.prettierignore'
 export const PACKAGE_JSON_FILE_NAME = 'package.json'
@@ -18,6 +19,20 @@ export const PRETTIER_CONFIG = `{
 export const PRETTIER_IGNORE = `node_modules
 dist
 package-lock.json
+`
+
+export const EDITORCONFIG_CONTENT = `root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
 `
 
 export const GENERATED_PACKAGE_SCRIPTS = {

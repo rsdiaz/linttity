@@ -35,12 +35,17 @@ test('nodejs preset generates expected files with skip-install', async () => {
       join(projectDir, '.prettierrc.json'),
       'utf-8'
     )
+    const editorconfig = await readFile(
+      join(projectDir, '.editorconfig'),
+      'utf-8'
+    )
     const packageJson = JSON.parse(
       await readFile(join(projectDir, 'package.json'), 'utf-8')
     )
 
     assert.match(eslint, /importPlugin\.configs\?\.recommended\?\.rules/)
     assert.match(prettier, /singleQuote/)
+    assert.match(editorconfig, /indent_size = 2/)
     assert.equal(typeof packageJson.scripts.lint, 'string')
   } finally {
     await rm(projectDir, { recursive: true, force: true })
@@ -62,7 +67,12 @@ test('nodets preset creates tsconfig when missing', async () => {
     assert.equal(result.status, 0, result.stderr)
 
     const tsconfig = await readFile(join(projectDir, 'tsconfig.json'), 'utf-8')
+    const editorconfig = await readFile(
+      join(projectDir, '.editorconfig'),
+      'utf-8'
+    )
     assert.match(tsconfig, /compilerOptions/)
+    assert.match(editorconfig, /end_of_line = lf/)
   } finally {
     await rm(projectDir, { recursive: true, force: true })
   }

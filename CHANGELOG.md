@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [1.1.3] - 2026-05-09
+
+### Added
+
+- Generated `.editorconfig` in both presets (`--nodejs` and `--nodets`).
+- Repository-level `.editorconfig` for consistent editor behavior.
+
+### Changed
+
+- Doctor diagnostics now include `.editorconfig` presence.
+- Smoke tests now validate `.editorconfig` generation in JavaScript and TypeScript presets.
+
 ## [1.1.2] - 2026-05-09
 
 ### Added
