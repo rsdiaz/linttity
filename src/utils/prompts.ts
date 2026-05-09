@@ -1,6 +1,7 @@
 import readline from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
 import { FileStrategy, Preset, RuleLevel } from '../types/install-summary.js'
+import { ui } from './ui.js'
 
 const ask = async (question: string): Promise<string> => {
   const rl = readline.createInterface({ input, output })
@@ -17,9 +18,9 @@ const pickFromMenu = async <T extends string>(
   choices: Array<{ key: string; value: T; description: string }>,
   fallback: T
 ): Promise<T> => {
-  const prompt = `${label}\n${choices
+  const prompt = `${ui.info(label)}\n${choices
     .map((choice) => `  ${choice.key}) ${choice.description}`)
-    .join('\n')}\nChoose: `
+    .join('\n')}\n${ui.info(`Choose (${fallback}):`)} `
 
   const response = await ask(prompt)
   const choice = choices.find((item) => item.key === response)
@@ -65,6 +66,8 @@ export const promptStrategy = async (): Promise<FileStrategy> => {
 }
 
 export const promptAddCi = async (): Promise<boolean> => {
-  const response = await ask('Generate GitHub Actions workflow? (Y/n): ')
+  const response = await ask(
+    `${ui.info('Generate GitHub Actions workflow? (Y/n):')} `
+  )
   return response !== 'n'
 }

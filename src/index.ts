@@ -21,10 +21,11 @@ import {
   promptStrategy
 } from './utils/prompts.js'
 import { runDoctor } from './utils/doctor.js'
+import { ui } from './utils/ui.js'
 
 const program = new Command()
 
-console.log(INTRO)
+console.log(ui.title(INTRO))
 
 program
   .version(VERSION, '-v, --version', 'output the current version')
@@ -68,29 +69,32 @@ const options = program.opts<{
 }>()
 
 const printSummary = (summary: InstallSummary): void => {
-  console.log('--- Summary ---')
-  console.log(`Preset: ${summary.preset}`)
-  console.log(`Rule level: ${summary.ruleLevel}`)
-  console.log(`Package manager: ${summary.packageManager}`)
+  console.log(`\n${ui.title('Summary')}`)
+  console.log(ui.divider())
+  console.log(ui.keyValue('Preset', summary.preset))
+  console.log(ui.keyValue('Rule level', summary.ruleLevel))
+  console.log(ui.keyValue('Package manager', summary.packageManager))
 
-  console.log('Installed packages:')
+  console.log(`\n${ui.info('Installed packages')}`)
   for (const dependency of summary.installedPackages) {
-    console.log(`- ${dependency}`)
+    console.log(ui.item(dependency))
   }
 
-  console.log('Touched files:')
+  console.log(`\n${ui.info('Touched files')}`)
   for (const touchedFile of summary.touchedFiles) {
-    console.log(`- ${touchedFile.path} (${touchedFile.status})`)
+    console.log(
+      ui.item(`${touchedFile.path} (${ui.status(touchedFile.status)})`)
+    )
   }
 
   if (summary.packageScripts.length > 0) {
-    console.log('Added package scripts:')
+    console.log(`\n${ui.info('Added package scripts')}`)
     for (const scriptName of summary.packageScripts) {
-      console.log(`- ${scriptName}`)
+      console.log(ui.item(scriptName))
     }
   }
 
-  console.log('---------------\n')
+  console.log(`${ui.divider()}\n`)
 }
 
 const resolveRuleLevel = async (): Promise<RuleLevel> => {
@@ -221,10 +225,10 @@ const run = async (): Promise<void> => {
     printSummary(summary)
   }
 
-  console.log(END_MESSAGE)
+  console.log(ui.success(END_MESSAGE))
 }
 
 void run().catch((error: unknown) => {
-  console.error(`Error: ${String(error)}`)
+  console.error(ui.error(String(error)))
   process.exitCode = 1
 })
