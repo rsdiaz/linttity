@@ -1,30 +1,43 @@
 {
   "name": "linttity",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Automate ESlint and Prettier configuration and install the necessary packages for Nodejs projects",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
-    "linttity": "./src/index.cjs"
+    "linttity": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p tsconfig.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "prepare": "npm run build",
+    "test": "node --test tests/**/*.test.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.28.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.5.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-unicorn": "^44.0.2",
-    "prettier": "^2.7.1",
-    "standard": "^17.0.0"
+    "@types/node": "^25.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-n": "^18.0.1",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-promise": "^7.3.0",
+    "eslint-plugin-unicorn": "^64.0.0",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "commander": "^9.4.1"
+    "commander": "^14.0.3"
   }
 }
