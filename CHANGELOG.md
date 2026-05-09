@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [1.1.1] - 2026-05-09
+
+### Added
+
+- Release checklist template and generator command:
+  - `.github/release-checklist-template.md`
+  - `npm run release:checklist -- [x.y.z] [--force]`
+- Patch release workflow command:
+  - `npm run release:patch`
+- Terminal UI utility for semantic output styling with no-color fallback.
+
+### Changed
+
+- Modernized CLI terminal UX with clearer hierarchy:
+  - colored status labels (info, success, warning, error)
+  - improved summary readability
+  - improved doctor output formatting
+  - clearer interactive prompt labels and defaults
+- README updated with release workflow command usage.
+
 ## [1.1.0] - 2026-05-09
 
 ### Added
