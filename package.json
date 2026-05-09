@@ -17,6 +17,10 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "prepare": "npm run build",
+    "release:patch": "node scripts/release-patch.mjs",
+    "release:checklist": "node scripts/create-release-checklist.mjs",
+    "release:preflight": "npm run format:check && npm run build && npm run lint && npm test",
+    "release:check": "npm run release:preflight && npm pack --dry-run && npm publish --dry-run",
     "test": "node --test tests/**/*.test.mjs"
   },
   "keywords": [],

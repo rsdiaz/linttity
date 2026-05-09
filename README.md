@@ -150,6 +150,27 @@ Run automated tests:
 npm test
 ```
 
+Generate a release checklist (auto-next patch by default):
+
+```bash
+npm run release:checklist
+```
+
+Generate or overwrite a checklist for a specific version:
+
+```bash
+npm run release:checklist -- 1.1.3 --force
+```
+
+Run patch release workflow (bump patch + checklist + release dry-runs):
+
+```bash
+npm run release:patch
+```
+
+Note: `release:checklist` without version picks the next available patch checklist file.
+Note: `release:patch` updates `package.json` version as part of the workflow.
+
 ## Quick smoke test
 
 From the repository root:
